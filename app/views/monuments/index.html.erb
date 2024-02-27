@@ -1,0 +1,29 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Monuments</h1>
+
+<div id="monuments">
+  <% @monuments.each do |monument| %>
+    <%= render monument %>
+    <p>
+      <%= link_to "Show this monument", monument %>
+    </p>
+  <% end %>
+</div>
+
+<div data-controller="form" data-form-date-value="<%=  @monuments.first.opening_date %>">
+  <a data-form-target="string" data-action="click->form#toggle" class="btn btn-primary">Show the Form</a>
+  <div data-form-target="slip" class="d-none">
+    <%= simple_form_for(@monument) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :name %>
+        <%= f.input :address %>
+        <%= f.input :opening_date, as: :string, input_html: {data: {controller: "datepickr"}} %>
+      <div class="form-actions">
+        <%= f.button :submit %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
